@@ -8,14 +8,27 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    struct Movie: Identifiable {
+        let id = UUID()
+        let name: String
+    }
+
+
+    private let movies = [
+        Movie(name: "Questão de tempo"),
+        Movie(name: "Gênio Indomável"),
+        Movie(name: "Cidade de Gelo"),
+        Movie(name: "Gladiador"),
+        Movie(name: "Uma Mente Brilhante")
+    ]
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("iMovies")
+        List {
+            ForEach(movies) {movie in
+                Text(movie.name)
+            }
         }
-        .padding()
     }
 }
 
