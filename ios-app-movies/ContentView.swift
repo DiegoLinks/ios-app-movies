@@ -14,7 +14,6 @@ struct ContentView: View {
         let name: String
     }
 
-
     private let movies = [
         Movie(name: "Questão de tempo"),
         Movie(name: "Gênio Indomável"),
@@ -24,10 +23,12 @@ struct ContentView: View {
     ]
     
     var body: some View {
-        List {
-            ForEach(movies) {movie in
-                Text(movie.name)
-            }
+        NavigationView{
+            List {
+                ForEach(movies) {movie in
+                    Text(movie.name)
+                }
+            }.navigationTitle("iMovies")
         }
     }
 }
