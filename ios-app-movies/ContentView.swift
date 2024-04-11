@@ -9,30 +9,37 @@ import SwiftUI
 
 struct ContentView: View {
     
-    struct Movie: Identifiable {
-        let id = UUID()
-        let name: String
-    }
-
-    private let movies = [
-        Movie(name: "Questão de tempo"),
-        Movie(name: "Gênio Indomável"),
-        Movie(name: "Cidade de Gelo"),
-        Movie(name: "Gladiador"),
-        Movie(name: "Uma Mente Brilhante")
-    ]
-    
     var body: some View {
-        NavigationView{
-            List {
-                ForEach(movies) {movie in
-                    Text(movie.name)
-                }
-            }.navigationTitle("iMovies")
+        List(movies) { movie in
+            MovieCardView(movie: movie)
         }
     }
 }
 
+struct MovieCardView: View {
+    let movie: Movie
+
+    var body: some View {
+        HStack {
+//            AsyncImage(url: URL(string: movie.coverImage))
+//                .frame(width: 100, height: 150)
+            VStack(alignment: .leading) {
+                Text(movie.title)
+                    .font(.headline)
+                Text(movie.genre)
+                    .font(.subheadline)
+                Text("Year: \(movie.releaseYear)")
+                    .font(.subheadline)
+                Text("Director: \(movie.director)")
+                    .font(.subheadline)
+            }
+            Spacer()
+        }
+        .padding()
+    }
+}
+
+
 #Preview {
-    ContentView()
+   ContentView()
 }
