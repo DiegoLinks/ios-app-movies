@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct ContentView: View {
     
@@ -20,9 +21,15 @@ struct MovieCardView: View {
     let movie: Movie
 
     var body: some View {
-        HStack {
-//            AsyncImage(url: URL(string: movie.coverImage))
-//                .frame(width: 100, height: 150)
+        VStack(alignment: .leading) {
+
+            WebImage(url: URL(string: movie.coverImage))
+                  .resizable()
+                  .indicator(.activity)
+                  .transition(.fade(duration: 0.5))
+                  .scaledToFit()
+                  .frame(width: 300, height: 500)
+            
             VStack(alignment: .leading) {
                 Text(movie.title)
                     .font(.headline)
@@ -33,9 +40,11 @@ struct MovieCardView: View {
                 Text("Director: \(movie.director)")
                     .font(.subheadline)
             }
-            Spacer()
         }
-        .padding()
+        //.padding()
+        .background(Color.white)
+        //.cornerRadius(10)
+        //.shadow(radius: 5)
     }
 }
 
