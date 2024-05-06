@@ -28,7 +28,7 @@ struct MovieCardView: View {
                   .indicator(.activity)
                   .transition(.fade(duration: 0.5))
                   .scaledToFit()
-                  .frame(width: 300, height: 500)
+                  .frame(width: 308, height: 500)
             
             VStack(alignment: .leading) {
                 Text(movie.title)
@@ -41,10 +41,10 @@ struct MovieCardView: View {
                     .font(.subheadline)
             }
         }
-        //.padding()
+        .padding()
         .background(Color.white)
-        //.cornerRadius(10)
-        //.shadow(radius: 5)
+        .cornerRadius(10)
+        .shadow(radius: 5)
     }
 }
 
