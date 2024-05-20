@@ -18,5 +18,6 @@ target 'ios-app-movies' do
 
 pod 'SDWebImage'
 pod 'SDWebImageSwiftUI'
+pod 'Alamofire'
 
 end
