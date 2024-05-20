@@ -1,18 +1,40 @@
-//
-//  ContentView.swift
-//  ios-app-movies
-//
-//  Created by Diego De Oliveira on 10/10/23.
-//
-
 import SwiftUI
 import SDWebImageSwiftUI
 
 struct ContentView: View {
-    
+    @State private var movies: [Movie] = []
+    @State private var isLoading = true
+    @State private var errorMessage: String?
+
     var body: some View {
-        List(movies) { movie in
-            MovieCardView(movie: movie)
+        NavigationView {
+            Group {
+                if isLoading {
+                    ProgressView("Loading...")
+                } else if let errorMessage = errorMessage {
+                    Text(errorMessage)
+                        .foregroundColor(.red)
+                } else {
+                    List(movies) { movie in
+                        MovieCardView(movie: movie)
+                    }
+                }
+            }
+            .onAppear(perform: fetchPopularMovies)
+            .navigationTitle("Popular Movies")
+        }
+    }
+
+    private func fetchPopularMovies() {
+        APIManager.shared.getPopularMovies { result in
+            switch result {
+            case .success(let movies):
+                self.movies = movies
+                self.isLoading = false
+            case .failure(let error):
+                self.errorMessage = error.localizedDescription
+                self.isLoading = false
+            }
         }
     }
 }
@@ -22,13 +44,12 @@ struct MovieCardView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-
             WebImage(url: URL(string: movie.coverImage))
-                  .resizable()
-                  .indicator(.activity)
-                  .transition(.fade(duration: 0.5))
-                  .scaledToFit()
-                  .frame(width: 308, height: 500)
+                .resizable()
+                .indicator(.activity)
+                .transition(.fade(duration: 0.5))
+                .scaledToFit()
+                .frame(width: 308, height: 500)
             
             VStack(alignment: .leading) {
                 Text(movie.title)
@@ -48,7 +69,6 @@ struct MovieCardView: View {
     }
 }
 
-
 #Preview {
-   ContentView()
+    ContentView()
 }
