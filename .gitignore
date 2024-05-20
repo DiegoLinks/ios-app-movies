@@ -1,0 +1,38 @@
+# Xcode
+#
+build/
+*.xcworkspace
+*.xcuserdata
+*.xcuserstate
+DerivedData/
+.idea/
+
+# SwiftPM
+#
+.build/
+.swiftpm/xcode/package.resolved
+
+# CocoaPods
+#
+Pods/
+Podfile.lock
+
+# Carthage
+#
+Carthage/Build/
+
+# fastlane
+#
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+fastlane/test_output
+
+# Realm
+#
+.realm
+.realm.lock
+.realm.management
+
+# Ignore configuration files
+config.plist
